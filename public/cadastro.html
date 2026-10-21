@@ -19,18 +19,18 @@
     
     <div class="conteiner-cadastro">
         <div class="conteiner-ch1">
-            <h2>Cadastro</h2><br>
+            <h2>Cadastro</h2>
         </div>
 
         <div class="cadastro-envio">
-            <label for="cadUsuario">Nome de usuario</label><br>
-            <input type="text" id="cadUsuario" placeholder="Digite seu nome" required><br><br>
+            <label for="cadUsuario">Nome de usuário</label>
+            <input type="text" id="cadUsuario" placeholder="Digite seu nome" required>
 
-            <label for="cadEmail">email</label><br>
-            <input type="email" id="cadEmail" placeholder="Digite seu email" required><br><br>
+            <label for="cadEmail">E-mail</label>
+            <input type="email" id="cadEmail" placeholder="Digite seu e-mail" required>
 
-            <label for="cadSenha">senha</label><br>
-            <input type="password" id="cadSenha" placeholder="Digite sua senha" required><br><br>
+            <label for="cadSenha">Senha</label>
+            <input type="password" id="cadSenha" placeholder="Digite sua senha" required>
 
             <button id="btnCadastro" class="card">Enviar</button>
             <div id="cadMensagem" class="mensagem"></div>
@@ -64,7 +64,7 @@
             cadMensagem.style.color = 'orange';
 
             try{
-                const respostaBE = await fetch('http://localhost:3000/cadastro', {
+                const respostaBE = await fetch('/cadastro', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
