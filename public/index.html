@@ -1,35 +1,148 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="./style.css">
-</head>
-<body class="home">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Naruto</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+
+  <header>
     <nav class="menu">
-        <a class="link" href="index.html">Home</a>
-        <a class="link" href="galeria.html">Galeria</a>
-        <a class="link" href="chat.html">Chat</a>
-        <a class="link" href="login.html">Login</a>
-        <a class="link" href="cadastro.html">Cadastro</a>
+        <a href="index.html" class="link-menu">Home</a>
+        <a href="galeria.html" class="link-menu">Galeria</a>
+        <a href="chat.html" class="link-menu">Chat</a>
+        <a href="cadastro.html" class="link-menu">Cadastro</a>
+        <a href="login.html" class="link-menu">Login</a>
+
     </nav>
-    <main class="guerr-head">
-        <div class="esquerdo">
-            <h1 class="guerreiro">Morty</h1>
-            <p class="apresentacao">Um adolescente comum — pelo menos até acompanhar Rick em viagens caóticas por diferentes dimensões.</p>
+  </header>
+
+    <header class="hero-deadpool">
+      <div class="esquerdo">
+        <h1 class="hero-titulo">NARUTO</h1>
+        <p class="hero-subtitulo">
+          A aventura de Naruto Uzumaki acompanha sua jornada como ninja, 
+          desde seus primeiros passos na Vila Oculta da Folha até enfrentar poderosos inimigos e grandes desafios.
+           Ao lado de seus amigos e companheiros, ele busca ficar mais forte,
+          proteger aqueles que ama e realizar seu maior sonho: tornar-se Hokage e conquistar o respeito de todos.
+        </p>
+      </div>
+
+      <img src="./imagens/Naruto-Uzumaki-corpo.png" alt="Naruto corpo todo" class="deadpool-front" />
+
+      <div class="direito">
+        <div class="bloco-balao">
+          <p id="balao-deadpool">
+            Olá. Se quiser conhecer mais sobre jutsus, aventuras ou conversar um
+            pouco, clique no botão abaixo.
+          </p>
         </div>
 
-        <div class="front">
-            <img src="./imagens/dhzewkl-08a36fba-5782-495a-8035-f7040893bb6c.png" alt="Morty Smith em uma aventura pelo multiverso" class="foto">
+        <a href="chat.html" class="btn-principal">Conversar no Chat</a>
+      </div>
+    </header>
+
+    <main class="container-principal">
+      <section class="secao-perfil">
+        <div class="perfil-moldura">
+          <img src="./imagens/naruto.jpg" alt="Naruto" class="perfil-foto" />
         </div>
 
-        <div class="direito">
-            <p class="balao">Coragem, confusão e aventuras interdimensionais: conheça Morty e o universo que o cerca.</p>
-            <a class="btp-personagens" href="galeria.html">Ver personagens</a>
-            <a class="btp-chat-home" href="chat.html">Conversar com Morty</a>
+        <div class="perfil-texto">
+          <h2>Quem é Naruto</h2>
+          <p>
+            Naruto Uzumaki é o protagonista do anime Naruto. Um jovem ninja da Vila Oculta da Folha que sonha em se tornar Hokage,
+             o líder mais respeitado de sua vila. Apesar de ter enfrentado preconceito e solidão durante a infância, 
+             Naruto nunca desistiu de seus objetivos. Conhecido por sua determinação, coragem e personalidade divertida, 
+            ele acredita no poder da amizade e está sempre disposto a proteger aqueles que ama.
+          </p>
+
+          <p>
+            Explore o site para conhecer seus companheiros, descobrir mais sobre
+            o universo de <strong>Naruto</strong> e conversar com o
+            personagem no chat.
+          </p>
         </div>
+      </section>
     </main>
-    <footer><p>&copy; Site desenvolvido pelo aluno Yohan do CEEP / 2026 Curitiba</p></footer>
-</body>
+
+    
+  <!-- Janela de confirmação para acessar o chat -->
+  <div id="avisoCadastro" class="modal-cadastro" hidden>
+    <div class="modal-conteudo"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="tituloAviso">
+
+      <h2 id="tituloAviso"> Uma pequena pausa!</h2>
+
+      <p>
+        É necessário ter uma conta para acessar o chat.
+        Quer fazer o cadastro?
+      </p>
+
+      <div class="modal-botoes">
+        <button id="btnSimCadastro" type="button">
+          Sim, quero cadastrar!
+        </button>
+
+        <button id="btnNaoCadastro" type="button">
+          Não, voltar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const avisoCadastro = document.getElementById('avisoCadastro');
+    const btnSimCadastro = document.getElementById('btnSimCadastro');
+    const btnNaoCadastro = document.getElementById('btnNaoCadastro');
+
+    // Captura os links e o botão que levam ao chat.
+    const linksChat = document.querySelectorAll(
+      'a[href="chat.html"]'
+    );
+
+    linksChat.forEach((link) => {
+      link.addEventListener('click', (evento) => {
+        evento.preventDefault();
+        avisoCadastro.hidden = false;
+        btnSimCadastro.focus();
+      });
+    });
+
+    // Sim: ir para o cadastro.
+    btnSimCadastro.addEventListener('click', () => {
+      window.location.href = 'cadastro.html';
+    });
+
+    // Não: fechar o aviso e continuar na página.
+    btnNaoCadastro.addEventListener('click', () => {
+      avisoCadastro.hidden = true;
+    });
+
+    // Fechar também ao clicar fora da janela.
+    avisoCadastro.addEventListener('click', (evento) => {
+      if (evento.target === avisoCadastro) {
+        avisoCadastro.hidden = true;
+      }
+    });
+
+    // Fechar com a tecla Escape.
+    document.addEventListener('keydown', (evento) => {
+      if (evento.key === 'Escape' && !avisoCadastro.hidden) {
+        avisoCadastro.hidden = true;
+      }
+    });
+  </script>
+
+
+
+<footer>
+    <p>&copy; 2026 Gustavo Henrique. Todos os direitos reservados.</p>
+</footer>
+
+  </body>
 </html>

@@ -1,788 +1,937 @@
-@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* =========================================================
-   RESET & VARIÁVEIS (identidade Rick and Morty)
-   ========================================================= */
-* {
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;700&display=swap');
+
+/* ============================= GALERIA DE HEROIS ====================== */
+
+body {
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    background-color: var(--fundo);
+    color: #f5f5f5;
 }
 
 :root {
-    --escuro-cinema: #0b0b0d;
-    --fundo-card: #1e1e24;
-    --card-azul: rgb(29, 61, 90);
-    --laranja: #ff4500;
-    --laranja-escuro: #e03d00;
-    --brilho: #ffcc00;
-    --azul: #03337c;
-    --verde: #00ff40;
-    --texto-suave: #d6e2ee;
-    --placeholder: #8d8d99;
-    color-scheme: dark;
+    --fundo: #111111;
+    --fundo-card: #252525;
+    --azul-claro: #FF9D00;
+    --brilho-azulado: #FFB733;
+    --azul: #FF6A00;
+    --branco: #ffffff;
+    --escuro-total: #f5f5f5;
+    --azul-escuro: rgba(255, 106, 0, 0.25);
+    --transition-speed: 0.4s;
 }
 
-body {
-    background-color: var(--escuro-cinema);
-    background-image: url("./imagens/portal verde.gif");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    color: white;
-    min-height: 100vh;
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    flex-direction: column;
-}
-
-body.home {
-    background-image: url("./imagens/cyberpunk laranja.gif");
-}
-
-/* =========================================================
-   MENU (comum a todas as páginas)
-   ========================================================= */
 .menu {
     position: sticky;
     top: 0;
-    background-color: rgba(30, 30, 36, 0.55);
-    padding: 20px;
+    background: #111111;
+    box-shadow: 0 4px 12px rgba(255, 106, 0, 0.2);
+    padding: 15px;
     text-align: center;
-    box-shadow: 0 4px 10px 0 var(--brilho);
     z-index: 1000;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
 }
 
-body.home .menu {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px 24px;
-}
-
-body.home .link {
-    margin: 0;
-}
-
-.link {
+.link-menu {
     font-family: 'Bangers', cursive;
+    color: #f5f5f5;
     text-decoration: none;
-    color: var(--brilho);
-    font-size: 1.8rem;
-    letter-spacing: 2px;
-    margin: 0 15px;
+    margin: 0 20px;
+    font-size: 1.9rem;
+    letter-spacing: 1px;
     transition: color 0.3s ease;
 }
 
-.link:hover {
-    color: var(--verde);
+.link-menu:hover {
+    color: var(--brilho-azulado);
 }
 
-/* =========================================================
-   BOTÕES GERAIS
-   ========================================================= */
-button,
-.btp,
-.btp-personagens,
-.card,
-.bpt-chat {
-    background-color: var(--brilho);
-    color: var(--escuro-cinema);
-    border: 2px solid var(--brilho);
-    border-radius: 12px;
-    padding: 10px 18px;
-    font-family: 'Bangers', cursive;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: all 0.4s ease;
-}
-
-/* :not(:disabled) evita que botão desativado "pule" ao passar o mouse */
-button:hover:not(:disabled),
-.btp:hover:not(:disabled),
-.btp-personagens:hover:not(:disabled),
-.card:hover:not(:disabled),
-.bpt-chat:hover:not(:disabled) {
-    transform: translateY(-5px);
-    border-color: aliceblue;
-    box-shadow: 0 12px 25px rgba(255, 204, 0, 0.5);
-}
-
-button:disabled,
-.bpt-chat:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-footer {
-    margin-top: auto;
-    text-align: center;
-    padding: 18px 20px;
-    font-family: 'Roboto', sans-serif;
-    font-size: 0.95rem;
-    color: var(--brilho);
-    background-color: rgba(0, 0, 0, 0.75);
-    border-top: 2px solid var(--laranja);
-    box-shadow: 0 -4px 12px rgba(255, 69, 0, 0.3);
-    letter-spacing: 0.5px;
-}
-
-footer p {
-    margin: 0;
-}
-
-/* =========================================================
-   HOME – index.html
-   ========================================================= */
-.guerr-head {
-    position: relative;
-    min-height: calc(100vh - 80px);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 40px 20px;
-    background-color: rgba(0, 0, 0, 0.25);
-    flex: 1;
-}
-
-.esquerdo,
-.direito {
-    max-height: 400px;
-    width: 100%;
-    max-width: 350px;
-    padding: 10px;
-    font-family: 'Bangers', cursive;
-    letter-spacing: 2px;
-    z-index: 2;
-}
-
-.guerreiro {
-    color: var(--brilho);
-    font-family: 'Bangers', cursive;
-    font-size: 5rem;
-    letter-spacing: 8px;
-    text-align: center;
-    text-shadow: 0 0 12px var(--laranja), 0 0 24px rgba(255, 69, 0, 0.4);
-}
-
-.apresentacao {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.4rem;
-    color: aliceblue;
-    text-align: center;
-    line-height: 1.5;
-    margin-top: 15px;
-}
-
-#balao,
-.balao {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.5rem;
-    color: aliceblue;
-    text-align: center;
-    margin-bottom: 25px;
-    border: 2px solid var(--brilho);
-    border-radius: 12px;
-    padding: 16px;
-    background-color: var(--fundo-card);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-}
-
-.front {
-    position: absolute;
-    height: 100%;
-    transform: translateX(-50%);
-    left: 50%;
-    filter: drop-shadow(0 0 15px var(--brilho));
-    pointer-events: none;
-    z-index: 1;
-}
-
-.foto {
-    height: min(850px, 90vh);
-    object-fit: contain;
-}
-
-.btp-personagens {
-    display: block;
-    margin: 0 auto;
-    font-size: 1.1rem;
-}
-
-.btp-chat-home {
-    display: block;
-    width: fit-content;
-    margin: 12px auto 0;
-    padding: 12px 18px;
-    border: 2px solid var(--brilho);
-    border-radius: 12px;
-    background-color: rgba(30, 30, 36, 0.8);
-    color: var(--brilho);
-    font-family: 'Bangers', cursive;
-    font-size: 1.15rem;
-    letter-spacing: 1.5px;
-    text-align: center;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.btp-chat-home:hover {
-    transform: translateY(-4px);
-    background-color: var(--fundo-card);
-    box-shadow: 0 8px 20px rgba(255, 204, 0, 0.4);
-}
-
-/* =========================================================
-   GALERIA – galeria.html
-   ========================================================= */
 .vitrine {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 40px;
-    width: 100%; /* sem isso, margin:auto dentro do body flex encolhe a grade */
+    gap: 60px;
+    padding: 60px;
     max-width: 1200px;
-    padding: 60px 20px;
     margin: 0 auto;
 }
 
-.personagem {
-    border: 3px solid var(--brilho);
+.card-heroi {
+    font-family: 'Roboto', sans-serif;
+    background: var(--fundo-card);
+    border: 3px solid var(--azul-claro);
+    box-shadow: 0 4px 15px rgba(255, 106, 0, 0.15);
     border-radius: 12px;
     padding: 25px;
-    font-family: 'Roboto', sans-serif;
-    letter-spacing: 1px;
-    text-align: center;
-    background-color: var(--card-azul);
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    min-height: 450px; /* era height fixo: cortava textos maiores */
-    transition: all 0.5s ease;
+    justify-content: space-between;
+    height: 360px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-.personagem:hover {
-    transform: translateY(-15px);
-    border-color: aliceblue;
-    box-shadow: 0 12px 25px rgba(255, 204, 0, 0.5);
-}
-
-.foto_personagem {
-    border: 3px solid var(--brilho);
+.foto-heroi {
     width: 100%;
+    height: 160px;
     object-fit: cover;
-    height: 200px;
-    border-radius: 12px;
-    transition: border-color 0.4s ease;
+    border-radius: 6px;
+    border: 2px solid var(--azul-claro);
+    transition: border-color 0.3s ease;
 }
 
-.personagem:hover .foto_personagem {
-    border-color: aliceblue;
-}
-
-.nome_personagem {
+.titulo-heroi {
     font-family: 'Bangers', cursive;
+    color: var(--azul-claro);
+    font-size: 2.3rem;
+    margin: 10px 0 0 0;
     letter-spacing: 2px;
-    text-align: center;
-    color: var(--brilho);
-    font-size: 1.8rem;
-    line-height: 2rem;
-    text-shadow: 0 0 8px rgba(255, 204, 0, 0.3);
 }
 
-.personagem p {
-    flex: 1;
-    font-size: 0.95rem;
-    color: var(--texto-suave);
+.desc-heroi {
+    color: #d1d1d1;
+    font-size: 1rem;
     line-height: 1.4;
+    margin: 5px 0 15px 0;
 }
 
-/* =========================================================
-   CHAT – chat.html
-   Layout em grade: título em cima, mensagens no meio (rolando)
-   e campo + botão "Enviar" lado a lado embaixo. Cada peça é
-   posicionada pelo próprio seletor, então funciona mesmo que
-   o HTML não tenha uma div envolvendo o campo e o botão.
-   Atende o chat novo e o "chat antigo" (mesmos estilos).
-   ========================================================= */
-.chat-container,
-.container-chat {
-    width: min(560px, 95%);
-    margin: 30px auto;
-    height: 75vh;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-rows: auto minmax(0, 1fr) auto;
-    background-color: var(--fundo-card);
-    border-radius: 14px;
-    border: 3px solid var(--brilho);
-    overflow: hidden;
-    box-shadow: 0 12px 40px rgba(255, 204, 0, 0.25);
-    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+.card-heroi:hover {
+    transform: translateY(-8px);
+    border-color: var(--brilho-azulado);
+    box-shadow: 0 12px 25px rgba(255, 157, 0, 0.35);
+    cursor: pointer;
 }
 
-.chat-container:hover,
-.container-chat:hover {
-    border-color: aliceblue;
-    box-shadow: 0 15px 40px rgba(255, 204, 0, 0.4);
+.card-heroi:hover .foto-heroi {
+    border-color: var(--brilho-azulado);
 }
 
-/* 1) Título */
-#boasVindas,
-.boasVindas {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    font-family: 'Bangers', cursive;
-    letter-spacing: 2px;
-    text-align: center;
-    padding: 18px;
-    font-size: 1.6rem;
-    color: var(--brilho);
-    border-bottom: 2px solid var(--laranja);
-    background-color: rgba(3, 51, 124, 0.25);
-    text-shadow: 0 0 8px rgba(255, 204, 0, 0.3);
-}
-
-/* 2) Área das mensagens (é a que rola) */
-#caixaChat,
-.janela-msg {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    min-height: 0;
-    padding: 20px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    background: linear-gradient(180deg, var(--escuro-cinema) 0%, var(--fundo-card) 100%);
-}
-
-.msg,
-.mensagem {
-    max-width: 80%;
-    padding: 12px 16px;
-    border-radius: 14px;
-    font-family: 'Roboto', sans-serif;
-    font-size: 0.95rem;
-    line-height: 1.45;
-    letter-spacing: normal;
-    border: 1px solid var(--brilho);
-    background-color: var(--azul);
-    align-self: flex-start;
-    overflow-wrap: break-word;
-}
-
-.mensagem.bot {
-    background-color: var(--azul);
-    color: #fff;
-    align-self: flex-start;
-    text-align: left;
-    border-bottom-left-radius: 4px;
-}
-
-.mensagem.usuario {
-    background-color: var(--laranja-escuro);
-    color: #fff;
-    align-self: flex-end;
-    text-align: left;
-    border-bottom-right-radius: 4px;
-}
-
-.mensagem strong,
-.msg strong {
-    display: block;
-    margin-bottom: 4px;
-    font-family: 'Bangers', cursive;
-    font-weight: normal;
-    font-style: normal;
-    letter-spacing: 1.5px;
-    color: var(--brilho);
-}
-
-/* 3) Barra de envio.
-   Caso A: o HTML tem uma div/form envolvendo campo e botão */
-#inputArea,
-.formulario-envio {
-    grid-column: 1 / -1;
-    grid-row: 3;
-    display: flex;
-    padding: 14px;
-    background-color: var(--escuro-cinema);
-    gap: 10px;
-    border-top: 2px solid var(--laranja);
-    align-items: center;
-}
-
-/* Caso B: campo e botão soltos dentro do chat.
-   O fundo da barra vem do ::after (só aparece se NÃO houver div envolvendo) */
-.chat-container:not(:has(#inputArea, .formulario-envio))::after,
-.container-chat:not(:has(#inputArea, .formulario-envio))::after {
-    content: "";
-    grid-column: 1 / -1;
-    grid-row: 3;
-    background-color: var(--escuro-cinema);
-    border-top: 2px solid var(--laranja);
-}
-
-:is(.chat-container, .container-chat) > :is(#mensagem, .inserir) {
-    grid-column: 1;
-    grid-row: 3;
-    z-index: 1;
-    justify-self: stretch;
-    align-self: center;
-    margin: 14px 0 14px 14px;
-}
-
-:is(.chat-container, .container-chat) > :is(#btnEnviar, .bpt-chat) {
-    grid-column: 2;
-    grid-row: 3;
-    z-index: 1;
-    align-self: stretch;
-    margin: 14px 14px 14px 10px;
-}
-
-#mensagem,
-.inserir {
-    flex: 1;
-    min-width: 0;
-    background-color: var(--fundo-card);
-    color: var(--brilho);
-    border: 2px solid var(--laranja);
-    border-radius: 10px;
-    padding: 12px 14px;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1rem; /* abaixo de 16px o iPhone dá zoom ao focar o campo */
-    outline: none;
-    transition: all 0.3s ease;
-}
-
-#mensagem::placeholder,
-.inserir::placeholder {
-    color: var(--placeholder);
-}
-
-#mensagem:hover,
-#mensagem:focus,
-.inserir:hover,
-.inserir:focus {
-    border-color: var(--brilho);
-    box-shadow: 0 0 12px rgba(255, 204, 0, 0.4);
-}
-
-/* Campo desativado enquanto o Morty responde: sem ficar lavado */
-#mensagem:disabled,
-.inserir:disabled {
-    opacity: 1;
-    color: var(--brilho);
-    background-color: var(--fundo-card);
-    border-color: var(--laranja);
-    box-shadow: none;
-    cursor: wait;
-}
-
-#btnEnviar,
-.formulario-envio .bpt-chat,
-:is(.chat-container, .container-chat) > .bpt-chat {
-    flex-shrink: 0;
-    background-color: var(--laranja);
-    color: var(--escuro-cinema);
-    border: 2px solid var(--brilho);
-    border-radius: 10px;
-    padding: 12px 20px;
+.btn-poder {
+    background: var(--azul);
+    color: white;
+    border: none;
+    padding: 8px 12px;
     font-family: 'Bangers', cursive;
     font-size: 1.1rem;
-    letter-spacing: 1px;
+    border-radius: 6px;
     cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.btn-poder:active {
+    transform: scale(0.95);
+}
+
+/* ========================================= HOME ================================================= */
+
+.link-menu:hover, .link-menu.ativo {
+    color: var(--azul);
+}
+
+.hero-deadpool {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    min-height: 85vh;
+    padding: 60px 40px;
+    text-align: center;
+    box-sizing: border-box;
+    background: var(--fundo);
+    filter: drop-shadow(0px 10px 12px rgba(255, 106, 0, .30));
+}
+
+.esquerdo {
+    width: 35%;
+    text-align: center;
+    height: 400px;
+    padding: 20px;
+}
+
+.hero-titulo {
+    font-family: 'Bangers', cursive;
+    font-size: 5.5rem;
+    color: var(--azul);
+    margin: 0;
+    letter-spacing: 10px;
+    text-shadow: 3px 3px 0px rgba(255, 106, 0, 0.2);
+}
+
+.hero-subtitulo {
+    color: #d1d1d1;
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 15px 0 30px 0;
+}
+
+.deadpool-front {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 90%;
+    max-height: 700px;
+    z-index: 1;
+    filter: drop-shadow(0px 20px 12px rgba(255, 106, 0, .25));
+}
+
+.direito {
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    text-align: center;
+    height: 400px;
+    padding: 10px;
+    gap: 100px;
+    align-items: center;
+    margin-top: 0;
+}
+
+.bloco-balao {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 30px;
+    background: #252525;
+    color: #f5f5f5;
+    border: 3px solid var(--azul-claro);
+    box-shadow: 0 4px 12px rgba(255, 106, 0, 0.2);
+    padding: 18px 28px;
+    border-radius: 60px;
+    font-weight: bold;
+    width: 350px;
+    font-size: 1.15rem;
+    transform: rotate(-4deg);
     transition: all 0.3s ease;
 }
 
-#btnEnviar:hover:not(:disabled),
-.formulario-envio .bpt-chat:hover:not(:disabled),
-:is(.chat-container, .container-chat) > .bpt-chat:hover:not(:disabled) {
-    background-color: var(--brilho);
-    transform: translateY(-3px);
-    border-color: var(--brilho);
-    box-shadow: 0 8px 18px rgba(255, 204, 0, 0.45);
-}
-
-#btnEnviar:disabled,
-.formulario-envio .bpt-chat:disabled,
-:is(.chat-container, .container-chat) > .bpt-chat:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}
-
-/* =========================================================
-   CADASTRO & LOGIN – cadastro.html / login.html
-   ========================================================= */
-.conteiner-cadastro {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 36px 20px;
-    position: relative;
-    flex: 1;
-}
-
-.conteiner-cadastro::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: min(550px, 100vw);
-    height: 550px;
-    transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(255, 69, 0, 0.1) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-}
-
-.conteiner-ch1 {
-    position: relative;
-    z-index: 1;
-    margin-bottom: 10px;
-}
-
-.conteiner-ch1 h2 {
+.btn-principal {
+    background: var(--azul);
+    color: #ffffff;
     font-family: 'Bangers', cursive;
-    letter-spacing: 5px;
-    font-size: 3rem;
-    color: var(--brilho);
-    text-shadow: 0 0 12px var(--laranja), 0 0 24px rgba(255, 69, 0, 0.45);
-    text-align: center;
+    font-size: 1.4rem;
+    padding: 12px 35px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px var(--azul-escuro);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    width: 250px;
 }
 
-.cadastro-envio,
-.login {
+.secao-perfil {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 60px;
+    align-items: center;
+    background: #252525;
+    padding: 40px;
+    border-radius: 24px;
+}
+
+.perfil-moldura {
+    overflow: hidden;
+    border-radius: 16px;
+    border: 4px solid var(--azul-claro);
+    box-shadow: 0 0 30px var(--azul-escuro);
+    cursor: pointer;
     position: relative;
-    z-index: 1;
-    border: 1px solid rgba(255, 204, 0, 0.65);
-    border-radius: 20px;
-    padding: 32px;
-    background: rgba(11, 11, 13, 0.82);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-    max-width: 420px;
-    box-shadow: 0 16px 42px rgba(0, 0, 0, 0.5);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.cadastro-envio:hover,
-.login:hover {
-    border-color: var(--brilho);
-    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.6);
-}
-
-.cadastro-envio label,
-.login label {
-    font-family: 'Bangers', cursive;
-    letter-spacing: 1.5px;
-    color: var(--brilho);
-    font-size: 1.15rem;
-    text-align: left;
-}
-
-.cadastro-envio input,
-.login input {
-    background-color: var(--escuro-cinema);
-    color: var(--brilho);
-    border: 2px solid var(--laranja);
-    border-radius: 12px;
-    padding: 13px 16px;
+.perfil-foto {
     width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.perfil-moldura:hover .perfil-foto {
+    transform: scale(1.08) rotate(3deg);
+    filter: brightness(1.15) contrast(1.05);
+}
+
+.perfil-moldura:hover {
+    border-color: var(--brilho-azulado);
+    box-shadow: 0 0 35px rgba(255, 157, 0, .35);
+}
+
+.perfil-texto h2 {
+    font-family: 'Bangers', cursive;
+    font-size: 2.8rem;
+    color: var(--azul);
+    margin-top: 0;
+    letter-spacing: 2px;
+}
+
+.perfil-texto p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #d1d1d1;
+}
+
+.btn-principal:hover {
+    transform: translateY(-4px);
+    background-color: var(--azul-claro);
+}
+
+.btn-principal:active {
+    transform: translateY(1px) scale(0.95);
+}
+
+/* ++++++++++++++++++++++++ CHAT DO PERSONAGEM ++++++++++++++++++++++++++++++++++++ */
+
+footer {
+    text-align: center;
+}
+
+.container-chat {
+    max-width: 550px;
+    margin: 20px auto;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #252525;
+    border-radius: 11px;
+    border: 3px solid var(--azul-claro);
+    overflow: hidden;
+}
+
+.janela-mensagens {
+    flex: 1;
+    padding: 20px;
+    background-size: cover;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.mensagem {
+    max-width: 75%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    border: 2px solid var(--azul-claro);
+}
+
+.mensagem.usuario {
+    background-color: #3b260f;
+    color: #ffffff;
+    align-self: flex-end;
+}
+
+.formulario-envio {
+    display: flex;
+    padding: 15px;
+    background-color: #1a1a1a;
+    gap: 10px;
+}
+
+.formulario-envio input {
+    flex: 1;
+    padding: 12px;
+    background-color: #252525;
+    color: #ffffff;
+    border: 1px solid var(--escuro-total);
+    border-radius: 8px;
+    outline: none;
+}
+
+.formulario-envio button {
+    padding: 0 20px;
+    background-color: var(--azul);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.formulario-envio button:hover {
+    background-color: var(--azul-claro);
+}
+
+.container-chat {
+    display: flex;
+    flex-direction: column;
+    height: 650px;
+    max-width: 540px;
+    width: calc(100% - 32px);
+    margin: 20px auto;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.janela-mensagens {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+#caixaChat {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+#caixaChat .msg {
+    max-width: 90%;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background-color: #252525;
+    color: #ffffff;
+    margin: 0;
+}
+
+.formulario-envio {
+    flex-shrink: 0;
+}
+
+/* ============================= CADASTRO ============================= */
+
+.secao-cadastro {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    background: linear-gradient(135deg, var(--fundo), #252525);
+}
+
+.card-cadastro {
+    width: 100%;
+    max-width: 500px;
+    background-color: var(--fundo-card);
+    border: 3px solid var(--azul-claro);
+    border-radius: 15px;
+    padding: 35px;
+    box-sizing: border-box;
+    box-shadow: 0 10px 30px rgba(255, 106, 0, 0.25);
     font-family: 'Roboto', sans-serif;
-    letter-spacing: 1px;
+}
+
+.card-cadastro h1 {
+    font-family: 'Bangers', cursive;
+    text-align: center;
+    font-size: 3rem;
+    color: var(--azul);
+    margin-top: 0;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.10);
+}
+
+.texto-cadastro {
+    text-align: center;
+    color: #d1d1d1;
+    margin-bottom: 30px;
+}
+
+/* Formulário */
+
+#formulario-cadastro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#formulario-cadastro label {
+    font-weight: bold;
+    color: #f5f5f5;
+    margin-top: 8px;
+}
+
+#formulario-cadastro input {
+    padding: 13px;
+    border: 2px solid var(--azul-claro);
+    border-radius: 8px;
+    background-color: #111111;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     outline: none;
-    transition: all 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.cadastro-envio input::placeholder,
-.login input::placeholder {
-    color: var(--placeholder);
+#formulario-cadastro input:focus {
+    border-color: var(--azul);
+    box-shadow: 0 0 8px rgba(255, 106, 0, 0.35);
 }
 
-.cadastro-envio input:hover,
-.cadastro-envio input:focus,
-.login input:hover,
-.login input:focus {
-    border-color: var(--brilho);
-    box-shadow: 0 0 15px rgba(255, 204, 0, 0.45);
-    transform: translateY(-2px);
+/* Botão */
+
+.btn-cadastro {
+    margin-top: 20px;
+    padding: 13px;
+    background-color: var(--azul);
+    color: var(--branco);
+    border: none;
+    border-radius: 8px;
+    font-family: 'Bangers', cursive;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px var(--azul-escuro);
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.card,
-#btnCadastro,
-#btnlogin {
-    margin-top: 18px;
-    width: 100%;
-    padding: 14px;
-    font-size: 1.3rem;
-    letter-spacing: 3px;
-    background-color: var(--laranja);
-    color: var(--escuro-cinema);
-    border: 2px solid var(--brilho);
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(255, 69, 0, 0.35);
+.btn-cadastro:hover {
+    background-color: var(--azul-claro);
+    transform: scale(1.05);
 }
 
-.card:hover:not(:disabled),
-#btnCadastro:hover:not(:disabled),
-#btnlogin:hover:not(:disabled) {
-    background-color: var(--brilho);
-    color: var(--escuro-cinema);
-    border-color: var(--laranja);
-    box-shadow: 0 12px 28px rgba(255, 204, 0, 0.5);
+.btn-cadastro:active {
+    transform: scale(0.97);
 }
 
-#cadMensagem,
-#loginMensagem {
-    margin-top: 18px;
-    padding: 12px 16px;
-    border-radius: 10px;
+#resposta {
     text-align: center;
+    margin-top: 20px;
     font-family: 'Roboto', sans-serif;
-    font-weight: 600;
-    font-size: 0.95rem;
-    min-height: 24px;
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
+    font-weight: bold;
 }
 
-/* Estados por classe (recomendado): adicione .erro / .sucesso / .aviso no JS.
-   Os seletores por style="color: ..." abaixo continuam funcionando. */
-#cadMensagem.erro,
-#loginMensagem.erro,
-#cadMensagem[style*="color: red"],
-#loginMensagem[style*="color: red"] {
-    background-color: rgba(255, 0, 0, 0.12);
-    border-color: var(--laranja);
+/* ============================= LOGIN ============================= */
+
+.secao-login {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    background: linear-gradient(135deg, var(--fundo), #252525);
 }
 
-#cadMensagem.sucesso,
-#loginMensagem.sucesso,
-#cadMensagem[style*="color: green"],
-#loginMensagem[style*="color: green"] {
-    background-color: rgba(0, 255, 64, 0.12);
-    border-color: var(--verde);
+.card-login {
+    width: 100%;
+    max-width: 500px;
+    background-color: var(--fundo-card);
+    border: 3px solid var(--azul-claro);
+    border-radius: 15px;
+    padding: 35px;
+    box-sizing: border-box;
+    box-shadow: 0 10px 30px rgba(255, 106, 0, 0.25);
+    font-family: 'Roboto', sans-serif;
 }
 
-#cadMensagem.aviso,
-#loginMensagem.aviso,
-#cadMensagem[style*="color: orange"],
-#loginMensagem[style*="color: orange"] {
-    background-color: rgba(255, 165, 0, 0.12);
-    border-color: var(--laranja);
+.card-login h1 {
+    font-family: 'Bangers', cursive;
+    text-align: center;
+    font-size: 3rem;
+    color: var(--azul);
+    margin-top: 0;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.10);
 }
 
-#cadMensagem:empty,
-#loginMensagem:empty {
+.texto-login {
+    text-align: center;
+    color: #d1d1d1;
+    margin-bottom: 30px;
+}
+
+/* Formulário Login */
+
+#formulario-login {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#formulario-login label {
+    font-weight: bold;
+    color: #f5f5f5;
+    margin-top: 8px;
+}
+
+#formulario-login input {
+    padding: 13px;
+    border: 2px solid var(--azul-claro);
+    border-radius: 8px;
+    background-color: #111111;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Botão */
+
+.btn-login {
+    margin-top: 20px;
+    padding: 13px;
+    background-color: var(--azul);
+    color: var(--branco);
+    border: none;
+    border-radius: 8px;
+    font-family: 'Bangers', cursive;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px var(--azul-escuro);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-login:hover {
+    background-color: var(--azul-claro);
+    transform: scale(1.05);
+}
+
+.btn-login:active {
+    transform: scale(0.97);
+}
+
+/* Rodapé */
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #111111;
+    color: #d1d1d1;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* ==========================================
+   RESPONSIVIDADE DA HOME PARA CELULARES
+   ========================================== */
+
+@media (max-width: 768px) {
+    .menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px 16px;
+        padding: 12px 8px;
+    }
+
+    .link-menu {
+        font-size: 1.4rem;
+        margin: 0;
+    }
+
+    .hero-deadpool {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 20px;
+        min-height: auto;
+        padding: 30px 16px;
+        overflow: hidden;
+        filter: none;
+    }
+
+    .esquerdo {
+        width: 100%;
+        height: auto;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .hero-titulo {
+        font-size: clamp(3rem, 12vw, 4.5rem);
+        letter-spacing: 5px;
+    }
+
+    .hero-subtitulo {
+        max-width: 100%;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin: 15px 0 0;
+        overflow-wrap: anywhere;
+    }
+
+    .deadpool-front {
+        position: relative;
+        left: auto;
+        bottom: auto;
+        transform: none;
+        display: block;
+        width: 75%;
+        max-width: 300px;
+        height: auto;
+        max-height: none;
+        object-fit: contain;
+        margin: 0 auto;
+    }
+
+    .direito {
+        width: 100%;
+        height: auto;
+        padding: 0;
+        margin: 0;
+        gap: 24px;
+        align-items: center;
+        box-sizing: border-box;
+    }
+
+    .bloco-balao {
+        width: 100%;
+        max-width: 400px;
+        box-sizing: border-box;
+        padding: 16px 18px;
+        margin: 0;
+        font-size: 1rem;
+        transform: rotate(-2deg);
+    }
+
+    #balao-deadpool {
+        margin: 0;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+    }
+
+    .btn-principal {
+        width: auto;
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: 12px 24px;
+        font-size: 1.3rem;
+        text-align: center;
+    }
+
+    .container-principal {
+        padding: 20px 12px;
+        box-sizing: border-box;
+    }
+
+    .secao-perfil {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .perfil-moldura {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .perfil-foto {
+        max-width: 100%;
+    }
+
+    .perfil-texto h2 {
+        font-size: 2.2rem;
+    }
+
+    .perfil-texto p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    footer {
+        padding: 16px;
+        overflow-wrap: anywhere;
+    }
+}
+
+@media (max-width: 380px) {
+    .link-menu {
+        font-size: 1.2rem;
+    }
+
+    .hero-deadpool {
+        padding: 24px 12px;
+    }
+
+    .hero-titulo {
+        font-size: 2.8rem;
+        letter-spacing: 3px;
+    }
+
+    .deadpool-front {
+        width: 85%;
+        max-width: 260px;
+    }
+
+    .bloco-balao {
+        padding: 14px;
+        font-size: 0.95rem;
+    }
+
+    .secao-perfil {
+        padding: 16px;
+    }
+}
+
+/* ===== Aviso de cadastro para acessar o chat ===== */
+
+.modal-cadastro[hidden] {
     display: none;
 }
 
-/* =========================================================
-   INPUTS GERAIS (fallback)
-   Não removemos o outline aqui: quem navega pelo teclado
-   precisa enxergar o foco. Os campos estilizados acima já
-   têm o próprio brilho no :focus.
-   ========================================================= */
-input {
-    color: var(--brilho);
+.modal-cadastro {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
 }
 
-/* =========================================================
-   RESPONSIVO
-   ========================================================= */
-@media (max-width: 900px) {
-    .guerr-head {
+.modal-conteudo {
+    width: 100%;
+    max-width: 420px;
+    padding: 30px;
+    color: #f5f5f5;
+    text-align: center;
+    background: linear-gradient(145deg, #252525, #111111);
+    border: 1px solid #FF6A00;
+    border-radius: 18px;
+    box-shadow: 0 0 30px rgba(255, 106, 0, 0.25);
+    animation: aparecerAviso 0.25s ease;
+}
+
+.modal-conteudo h2 {
+    margin-top: 0;
+    color: #FF9D00;
+}
+
+.modal-conteudo p {
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+.modal-botoes {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.modal-botoes button {
+    padding: 12px 16px;
+    border: 1px solid #FF6A00;
+    border-radius: 10px;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+#btnSimCadastro {
+    color: white;
+    background: #FF6A00;
+}
+
+#btnNaoCadastro {
+    color: #f5f5f5;
+    background: #252525;
+}
+
+.modal-botoes button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.15);
+}
+
+.modal-botoes button:focus-visible {
+    outline: 3px solid #FFB733;
+    outline-offset: 3px;
+}
+
+@keyframes aparecerAviso {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 420px) {
+    .modal-conteudo {
+        padding: 24px 18px;
+    }
+
+    .modal-botoes {
         flex-direction: column;
-        text-align: center;
-        gap: 30px;
     }
 
-    .front {
-        position: relative;
-        left: auto;
-        transform: none;
-        order: -1;
-    }
-
-    .foto {
-        height: 400px;
-    }
-
-    .guerreiro {
-        font-size: 3.5rem;
+    .modal-botoes button {
+        width: 100%;
     }
 }
 
-@media (max-width: 600px) {
-    .link {
-        font-size: 1.2rem;
-        margin: 0 8px;
-    }
+/* Fundo escuro atrás da confirmação */
 
-    .vitrine {
-        padding: 30px 15px;
-        gap: 25px;
-    }
-
-    .personagem {
-        min-height: 400px;
-    }
-
-    .conteiner-ch1 h2 {
-        font-size: 2.4rem;
-    }
-
-    .cadastro-envio,
-    .login {
-        padding: 26px 22px;
-    }
-
-    .chat-container,
-    .container-chat {
-        margin: 15px auto;
-        height: 70vh;
-    }
-
-    #boasVindas,
-    .boasVindas {
-        font-size: 1.3rem;
-        padding: 14px;
-    }
-
-    #btnEnviar,
-    .formulario-envio .bpt-chat {
-        padding: 12px 14px;
-        font-size: 1rem;
-    }
+.aviso-chat[hidden] {
+    display: none;
 }
 
-/* background-attachment: fixed é bugado/pesado em celular (iOS ignora) */
-@media (hover: none) and (pointer: coarse) {
-    body {
-        background-attachment: scroll;
-    }
+.aviso-chat {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.85);
 }
 
-/* Respeita quem desativa animações no sistema */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        transition-duration: 0.01ms !important;
-    }
+/* Caixa principal */
+
+.conteudo-aviso-chat {
+    width: 100%;
+    max-width: 430px;
+    padding: 28px;
+    background: #252525;
+    color: #f5f5f5;
+    border: 2px solid #FF6A00;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(255, 106, 0, 0.35);
+    animation: aparecerAviso 0.2s ease-out;
+}
+
+.conteudo-aviso-chat h2 {
+    margin-top: 0;
+    color: #FF9D00;
+}
+
+.conteudo-aviso-chat p {
+    line-height: 1.6;
+}
+
+.botoes-aviso-chat {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.botoes-aviso-chat button {
+    padding: 12px 16px;
+    border: none;
+    border-radius: 10px;
+    background: #FF6A00;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.botoes-aviso-chat button:hover {
+    background: #FF9D00;
+    transform: translateY(-2px);
+}
+
+#btnNaoChat {
+    background: #444444;
+}
+
+#btnNaoChat:hover {
+    background: #333333;
 }

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -5,97 +6,195 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <nav class="menu">
-        <a class="link" href="index.html">Home</a>
-        <a class="link" href="galeria.html">Galeria</a>
-        <a class="link" href="chat.html">Chat</a>
-        <a class="link" href="login.html">Login</a>
-        <a class="link" href="cadastro.html">Cadastro</a>
-    </nav>
+
+    <!-- Cabeçalho e menu -->
+    <header>
+        <nav class="menu">
+            <a href="index.html" class="link-menu">Home</a>
+            <a href="galeria.html" class="link-menu">Galeria</a>
+            <a href="#" class="link-menu abrir-aviso-chat">Chat</a>
+            <a href="cadastro.html" class="link-menu">Cadastro</a>
+            <a href="login.html" class="link-menu">Login</a>
+        </nav>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main>
+
+        <!-- Seção de cadastro -->
+        <section class="secao-cadastro">
+
+            <!-- Artigo contendo o formulário -->
+            <article class="card-cadastro">
+
+                <h1>Cadastro</h1>
+
+                <p class="texto-cadastro">
+                    Preencha os campos abaixo para realizar seu cadastro.
+                </p>
+
+                <!-- Formulário -->
+                <form id="formulario-cadastro">
+
+                    
+    <label for="usuario">Nome do usuário</label><br>
+    <input type="text" id="usuario" placeholder="Digite seu nome"
+    required>
     
-    <div class="conteiner-cadastro">
-        <div class="conteiner-ch1">
-            <h2>Cadastro</h2>
-        </div>
 
-        <div class="cadastro-envio">
-            <label for="cadUsuario">Nome de usuário</label>
-            <input type="text" id="cadUsuario" placeholder="Digite seu nome" required>
+    <label for="email">E-mail</label><br>
+    <input type="email" id="email" placeholder="Digite seu e-mail"
+    required>
 
-            <label for="cadEmail">E-mail</label>
-            <input type="email" id="cadEmail" placeholder="Digite seu e-mail" required>
+    <label for="senha">Senha</label><br>
+    <input type="password" id="senha" placeholder="Digite sua senha"
+    required>
 
-            <label for="cadSenha">Senha</label>
-            <input type="password" id="cadSenha" placeholder="Digite sua senha" required>
+    <button id="btncadastro" class="btn-cadastro">Enviar</button>
+    <div id="cadmensagem" class="cardMensagem"></div>
 
-            <button id="btnCadastro" class="card">Enviar</button>
-            <div id="cadMensagem" class="mensagem"></div>
-        </div>
-    </div>
+                </form>
 
+                <!-- Resposta do servidor -->
+                <div id="resposta"></div>
+
+            </article>
+
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
     <footer>
-        <p>©Desenvolvido por Yohan Denk</p>
+        <p>
+            &copy; 2026 Gustavo Henrique. Todos os direitos reservados.
+        </p>
     </footer>
 
     <script>
-        const btnCadastro = document.querySelector('#btnCadastro');
-        const cadMensagem = document.querySelector('#cadMensagem');
+        
+const btnCadastrar = document.querySelector('#btncadastro');
+const campoUsuario = document.querySelector('#usuario');
+const campoEmail = document.querySelector('#email');
+const campoSenha = document.querySelector('#senha');
+const mensagemCadastro = document.querySelector('#cadmensagem');
 
-        btnCadastro.addEventListener('click', async ()=>{
-            const usuarioEntrada = document.querySelector('#cadUsuario');
-            const emailEntrada = document.querySelector('#cadEmail');
-            const senhaEntrada = document.querySelector('#cadSenha');
+btnCadastrar.addEventListener('click', async (evento) => {
+    evento.preventDefault();
 
-            const usuario = usuarioEntrada.value;
-            const email = emailEntrada.value;
-            const senha = senhaEntrada.value;
+    const usuario = campoUsuario.value.trim();
+    const email = campoEmail.value.trim();
+    const senha = campoSenha.value;
 
-            if (!usuario || !email || !senha) {
-                cadMensagem.innerText = 'Preencha todos os campos antes de enviar!'
-                cadMensagem.style.color = 'red';
-                return;
-            }
+    if (!usuario || !email || !senha) {
+        mensagemCadastro.textContent = 'Preencha todos os campos!';
+        return;
+    }
 
-            cadMensagem.innerText = 'Dados enviados aguarde 5 segundos...';
-            cadMensagem.style.color = 'orange';
+    btnCadastrar.disabled = true;
+    mensagemCadastro.textContent = 'Criando sua conta...';
 
-            try{
-                const respostaBE = await fetch('/cadastro', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        usuario: usuario,
-                        email: email,
-                        senha: senha
-                    })
-                });
-
-                const dados = await respostaBE.json();
-
-                if(!respostaBE.ok) {
-                    cadMensagem.innerText = `${dados.erro}`;
-                    cadMensagem.style.color = 'red';
-                    return;
-                }
-
-                cadMensagem.innerText = `${dados.mensagem}: ${dados.perfil}`;
-                cadMensagem.style.color = 'green';
-
-                usuarioEntrada.value = '';
-                emailEntrada.value = '';
-                senhaEntrada.value = '';
-            }
-            catch(erro) {
-                console.error('Erro na requisição:', erro);
-                cadMensagem.innerText = 'Erro ao conectar com o servidor!!';
-                cadMensagem.style.color = 'red';
-            }
+    try {
+        const resposta = await fetch('/cadastro', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ usuario, email, senha })
         });
-    </script>
-</body>
 
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+            mensagemCadastro.textContent =
+                dados.erro || 'Não foi possível realizar o cadastro.';
+            return;
+        }
+
+        
+        mensagemCadastro.textContent =
+    'Cadastro realizado com sucesso! Redirecionando para o login...';
+
+window.location.href = '/login.html';
+
+    } catch (erro) {
+        console.error('Erro no cadastro:', erro);
+        mensagemCadastro.textContent =
+            'Não foi possível conectar ao servidor.';
+    } finally {
+        btnCadastrar.disabled = false;
+    }
+});
+
+
+       
+    </script>
+
+
+
+<!-- Aviso para acessar o chat -->
+<div id="avisoChat" class="aviso-chat" role="dialog"
+     aria-modal="true" aria-labelledby="tituloAvisoChat"
+     aria-describedby="textoAvisoChat" hidden>
+
+    <div class="conteudo-aviso-chat">
+        <h2 id="tituloAvisoChat">Um momento, aventureiro!</h2>
+
+        <p id="textoAvisoChat">
+            É necessário ter uma conta para acessar o chat.
+            Quer fazer o cadastro?
+        </p>
+
+        <div class="botoes-aviso-chat">
+            <button type="button" id="btnSimChat">
+                Sim, fazer cadastro
+            </button>
+
+            <button type="button" id="btnNaoChat">
+                Não, continuar navegando
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const avisoChat = document.querySelector('#avisoChat');
+    const btnSimChat = document.querySelector('#btnSimChat');
+    const btnNaoChat = document.querySelector('#btnNaoChat');
+
+    document.querySelectorAll('.abrir-aviso-chat').forEach(link => {
+        link.addEventListener('click', evento => {
+            evento.preventDefault();
+            avisoChat.hidden = false;
+            btnSimChat.focus();
+        });
+    });
+
+    btnSimChat.addEventListener('click', () => {
+        window.location.href = 'cadastro.html';
+    });
+
+    btnNaoChat.addEventListener('click', () => {
+        avisoChat.hidden = true;
+    });
+
+    avisoChat.addEventListener('click', evento => {
+        if (evento.target === avisoChat) {
+            avisoChat.hidden = true;
+        }
+    });
+
+    document.addEventListener('keydown', evento => {
+        if (evento.key === 'Escape' && !avisoChat.hidden) {
+            avisoChat.hidden = true;
+        }
+    });
+</script>
+
+</body>
 </html>
+
