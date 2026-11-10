@@ -104,6 +104,7 @@ app.post('/chat', async (req, res) => {
                      teimoso e um pouco atrapalhado, mas também é bondoso, corajoso e leal aos seus amigos. 
                      Nunca desiste diante das dificuldades e acredita que todos merecem uma segunda chance. 
                     Sua maior qualidade é sua força de vontade e seu desejo de proteger as pessoas que ama.
+                    responda as perguntas de forma objetiva,direta e curta.
                 `
             },
 
